@@ -17,6 +17,8 @@ services:
       default:
         aliases:
           - upf.free5gc.org
+      default:
+        ipv4_address: 10.60.0.1
 
   db:
     container_name: mongodb
@@ -248,6 +250,12 @@ networks:
         - subnet: 10.100.200.0/24
     driver_opts:
       com.docker.network.bridge.name: br-free5gc
+  dn-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "10.60.0.0/16"
+          gateway: "10.60.0.1"
 
 volumes:
   dbdata:
